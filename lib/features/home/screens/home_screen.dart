@@ -12,9 +12,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      child: Container(
         child: Center(
           child: Text("Home Screen"),
-        )
+        ),
+      ),
     );
   }
 }
