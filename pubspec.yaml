@@ -78,3 +78,7 @@ flutter:
         - family: Komi
           fonts:
               - asset: assets/fonts/KNPSKkomi.otf
+
+        - family: Francisco
+          fonts:
+              - asset: assets/fonts/Francisco.woff
