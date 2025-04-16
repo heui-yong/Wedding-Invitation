@@ -73,15 +73,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                                 const SizedBox(
                                   height: 14,
                                 ),
-                                TypeWriter.text(
-                                  AppString.splashTitle,
-                                  duration: const Duration(milliseconds: 100),
-                                  softWrap: false,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                      fontSize: 24,
-                                      color: AppColor.color_000000,
-                                      fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: TypeWriter.text(
+                                    AppString.splashTitle,
+                                    duration: const Duration(milliseconds: 150),
+                                    softWrap: false,
+                                    alignment: Alignment.center,
+                                    style: const TextStyle(
+                                        fontSize: 24,
+                                        color: AppColor.color_000000,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ],
                             ),
