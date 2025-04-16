@@ -17,7 +17,22 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
+    _initializeApp();
   }
+
+  Future<void> _initializeApp() async {
+    try {
+      await Future.delayed(const Duration(milliseconds: 3500));
+
+      if (mounted) {
+        context.go('/home');
+      }
+    } catch (error) {
+      throw Exception('Error during initialization: $error');
+    }
+  }
+
 
   @override
   void dispose() {
