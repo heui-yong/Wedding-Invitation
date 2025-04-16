@@ -48,26 +48,14 @@
 
             // 카카오 공유하기 함수
             function shareKakao(title, description, imageUrl, linkUrl) {
-                Kakao.Share.sendDefault({
-                    objectType: "feed",
-                    content: {
+                Kakao.Share.sendCustom({
+                    templateId: 119793,
+                    templateArgs: {
                         title: title,
                         description: description,
                         imageUrl: imageUrl,
-                        link: {
-                            mobileWebUrl: linkUrl,
-                            webUrl: linkUrl,
-                        },
+                        link: linkUrl,
                     },
-                    buttons: [
-                        {
-                            title: "초대장 보기",
-                            link: {
-                                mobileWebUrl: linkUrl,
-                                webUrl: linkUrl,
-                            },
-                        },
-                    ],
                 });
             }
         </script>

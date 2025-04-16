@@ -27,7 +27,7 @@ class KakaoShareService {
       title: '웨딩 초대장',
       description: '저희의 결혼식에 초대합니다',
       imageUrl:
-          '${Uri.base.origin}/assets/images/main_image.jpg', // 대표 이미지 경로 (조정 필요)
+          '${Uri.base.origin}/Wedding-Invitation/assets/images/main_image.jpg',
       linkUrl: currentUrl,
     );
   }
