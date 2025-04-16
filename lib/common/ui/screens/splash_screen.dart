@@ -62,7 +62,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                         Expanded(
                           child: Center(
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                   AppImagePath.splashIconPath,
@@ -77,7 +78,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                                   duration: const Duration(milliseconds: 100),
                                   softWrap: false,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 24,
                                       color: AppColor.color_000000,
                                       fontWeight: FontWeight.w500),
@@ -86,7 +87,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                             ),
                           ),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 20),
                           child: Column(
                             children: [
