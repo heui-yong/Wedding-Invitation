@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!--
+    <head>
+        <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -14,25 +14,62 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/Wedding-Invitation/">
+        <base href="/Wedding-Invitation/" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+        <meta charset="UTF-8" />
+        <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+        <meta name="description" content="A new Flutter project." />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="frontend">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+        <!-- iOS meta tags & icons -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="frontend" />
+        <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>frontend</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
+        <title>frontend</title>
+        <link rel="manifest" href="manifest.json" />
+
+        <!-- Kakao SDK -->
+        <script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js"
+            integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <script src="flutter_bootstrap.js" async></script>
+
+        <!-- Kakao SDK 초기화 -->
+        <script>
+            Kakao.init("b2013991fda53f38493a90d79bb2db25");
+
+            // 카카오 공유하기 함수
+            function shareKakao(title, description, imageUrl, linkUrl) {
+                Kakao.Share.sendDefault({
+                    objectType: "feed",
+                    content: {
+                        title: title,
+                        description: description,
+                        imageUrl: imageUrl,
+                        link: {
+                            mobileWebUrl: linkUrl,
+                            webUrl: linkUrl,
+                        },
+                    },
+                    buttons: [
+                        {
+                            title: "초대장 보기",
+                            link: {
+                                mobileWebUrl: linkUrl,
+                                webUrl: linkUrl,
+                            },
+                        },
+                    ],
+                });
+            }
+        </script>
+    </body>
 </html>
