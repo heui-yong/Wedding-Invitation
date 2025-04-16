@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/common/common.dart';
 import 'package:go_router/go_router.dart';
 import 'package:frontend/features/home/screens/home_screen.dart';
+import 'package:typewritertext/typewritertext.dart';
+import 'dart:ui';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -10,38 +13,19 @@ class SplashScreen extends ConsumerStatefulWidget {
   ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _opacityAnimation;
-
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
-    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(_animationController);
-    _initializeApp();
-  }
-
-  Future<void> _initializeApp() async {
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (mounted) {
-        await _animationController.forward();
-        context.go('/home');
-      }
-    } catch (error) {
-      throw Exception('Error during initialization: $error');
-    }
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
     super.dispose();
+  }
+
+  void _clickScreen() {
+    context.go('/home');
   }
 
   @override
@@ -49,33 +33,87 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with SingleTickerPr
     return Stack(
       children: [
         const HomeScreen(),
-        AnimatedBuilder(
-          animation: _opacityAnimation,
-          builder: (context, child) {
-            return Opacity(
-              opacity: 0.7 * _opacityAnimation.value,
-              child: Scaffold(
-                backgroundColor: Colors.white,
-                body: SafeArea(
-                  child: Center(
+        Scaffold(
+          backgroundColor: AppColor.color_transparent,
+          body: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      AppColor.color_FBC2EB.withOpacity(0.3),
+                      AppColor.color_A6C1EE.withOpacity(0.3),
+                    ],
+                  ),
+                ),
+                child: InkWell(
+                  splashColor: AppColor.color_transparent,
+                  highlightColor: AppColor.color_transparent,
+                  focusColor: AppColor.color_transparent,
+                  hoverColor: AppColor.color_transparent,
+                  onTap: _clickScreen,
+                  child: SafeArea(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "청첩장에 오신 것을 환영합니다",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(
+                                  AppImagePath.splashIconPath,
+                                  width: 70,
+                                  height: 70,
+                                ),
+                                const SizedBox(
+                                  height: 14,
+                                ),
+                                TypeWriter.text(
+                                  AppString.splashTitle,
+                                  duration: const Duration(milliseconds: 100),
+                                  softWrap: false,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: AppColor.color_000000,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 20),
+                          child: Column(
+                            children: [
+                              Text(
+                                AppString.marryDate,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColor.color_000000,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                AppString.marryPlace,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColor.color_000000,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
       ],
     );
