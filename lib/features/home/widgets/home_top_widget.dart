@@ -15,7 +15,9 @@ class HomeTopWidget extends StatelessWidget {
           AppString.homeTitle,
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontFamily: "Francisco", fontSize: 24, color: AppColor.color_9E9E9E),
+              fontFamily: "Francisco",
+              fontSize: 24,
+              color: AppColor.color_9E9E9E),
         ),
         const SizedBox(height: 14),
         Row(
@@ -33,9 +35,7 @@ class HomeTopWidget extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   AppString.groomNameKo,
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: AppColor.color_9E9E9E),
+                  style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
                 )
               ],
             ),
@@ -58,35 +58,32 @@ class HomeTopWidget extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   AppString.brideNameKo,
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: AppColor.color_9E9E9E),
+                  style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
                 )
               ],
             ),
           ],
         ),
-        const SizedBox(height: 14,),
-        Flexible(
-          child: Image.asset(
-            AppImagePath.homeTitlePath,
-            width: MediaQuery.of(context).size.width * 0.6,
-            fit: BoxFit.contain,
-          ),
+        const SizedBox(
+          height: 14,
         ),
-        const SizedBox(height: 14,),
+        Image.asset(
+          AppImagePath.homeTitlePath,
+          width: MediaQuery.of(context).size.width * 0.6,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(
+          height: 14,
+        ),
         const Text(
           AppString.marryDate,
-          style: TextStyle(
-              fontSize: 14,
-              color: AppColor.color_9E9E9E),
+          style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
         ),
         const Text(
           AppString.marryPlace,
-          style: TextStyle(
-              fontSize: 14,
-              color: AppColor.color_9E9E9E),
+          style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
         ),
+        const SizedBox(height: 24)
       ],
     );
   }

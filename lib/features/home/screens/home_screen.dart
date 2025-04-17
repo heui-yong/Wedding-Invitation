@@ -11,25 +11,24 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late List<GalleryModel> galleryImageList;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    galleryImageList = ref.watch(galleryImageListProvider);
+
+    return Scaffold(
       backgroundColor: AppColor.color_ffffff,
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: HomeTopWidget(),
-        // 카카오톡 공유 버튼 추가
-        // Padding(
-        //   padding: const EdgeInsets.all(16.0),
-        //   child: KakaoShareButton(
-        //     label: '초대장 공유하기',
-        //     title: '우리의 결혼식에 초대합니다',
-        //     description: '소중한 분들을 초대합니다. 참석해 주시면 감사하겠습니다.',
-        //     imageUrl:
-        //         '${Uri.base.origin}/Wedding-Invitation/assets/images/main_image.jpg',
-        //     linkUrl: Uri.base.toString(),
-        //   ),
-        // ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const HomeTopWidget(),
+            HomeGalleryWidget(galleryImageList: galleryImageList)
+          ],
+        ),
       ),
     );
   }

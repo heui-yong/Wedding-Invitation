@@ -9,4 +9,5 @@ class AppString {
   static const String brideNameEn = "Jeong Yoon";
   static const String groomNameKo = "이 희 용";
   static const String brideNameKo = "백 정 윤";
+  static const String homeGallery = "Gallery";
 }
