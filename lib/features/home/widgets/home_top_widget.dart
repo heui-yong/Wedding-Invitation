@@ -83,6 +83,7 @@ class HomeTopWidget extends StatelessWidget {
           AppString.marryPlace,
           style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
         ),
+        const SizedBox(height: 24)
       ],
     );
   }
