@@ -29,6 +29,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const HomeTopWidget(),
+                BouquetWidget(),
+                InvitationMessageWidget(),
                 // HomeGalleryWidget(galleryImageList: galleryImageList)
                 HomeGalleryWidget2(galleryImageList: galleryImageList)
               ],

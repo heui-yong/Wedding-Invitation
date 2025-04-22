@@ -10,4 +10,7 @@ class AppString {
   static const String groomNameKo = "이 희 용";
   static const String brideNameKo = "백 정 윤";
   static const String homeGallery = "Gallery";
+  static const String homeInvitationMessageTitleEn = "INVITATION";
+  static const String homeInvitationMessageTitle = "소중한 분들을 초대합니다.";
+  static const String homeInvitationMessageDesc = "살랑이는 바람결에\n사랑이 묻어나는 계절입니다.\n여기 곱고 예쁜 두 사람이 사랑을 맺어\n인생의 반려자가 되려 합니다.\n 새 인생을 시작하는 이 자리에 오셔서\n축복해 주시면 감사하겠습니다.";
 }
