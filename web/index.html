@@ -42,6 +42,136 @@
             integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8"
             crossorigin="anonymous"
         ></script>
+
+        <!-- Phone and SMS handling for KakaoTalk WebView -->
+        <script>
+            // 전화 걸기 함수
+            function callPhoneNumber(phoneNumber) {
+                try {
+                    // 다양한 방법으로 시도
+
+                    // 1. iframe을 사용하는 방법
+                    var iframe = document.createElement("iframe");
+                    iframe.style.display = "none";
+                    iframe.src = "tel:" + phoneNumber;
+                    document.body.appendChild(iframe);
+                    setTimeout(function () {
+                        document.body.removeChild(iframe);
+                    }, 100);
+
+                    // 2. a 요소를 사용하는 방법
+                    setTimeout(function () {
+                        var a = document.createElement("a");
+                        a.setAttribute("href", "tel:" + phoneNumber);
+                        a.setAttribute("target", "_blank");
+                        a.style.display = "none";
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(function () {
+                            document.body.removeChild(a);
+                        }, 100);
+                    }, 150);
+
+                    // 3. 직접 location.href 설정하는 방법
+                    setTimeout(function () {
+                        window.location.href = "tel:" + phoneNumber;
+                    }, 200);
+
+                    // 4. window.open 사용
+                    setTimeout(function () {
+                        window.open("tel:" + phoneNumber, "_system");
+                    }, 250);
+                } catch (e) {
+                    console.error("전화 걸기 오류:", e);
+                    // 최후의 수단
+                    window.location.href = "tel:" + phoneNumber;
+                }
+            }
+
+            // 문자 보내기 함수
+            function sendSMS(phoneNumber) {
+                try {
+                    // 다양한 방법으로 시도
+
+                    // 1. iframe을 사용하는 방법
+                    var iframe = document.createElement("iframe");
+                    iframe.style.display = "none";
+                    iframe.src = "sms:" + phoneNumber;
+                    document.body.appendChild(iframe);
+                    setTimeout(function () {
+                        document.body.removeChild(iframe);
+                    }, 100);
+
+                    // 2. a 요소를 사용하는 방법
+                    setTimeout(function () {
+                        var a = document.createElement("a");
+                        a.setAttribute("href", "sms:" + phoneNumber);
+                        a.setAttribute("target", "_blank");
+                        a.style.display = "none";
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(function () {
+                            document.body.removeChild(a);
+                        }, 100);
+                    }, 150);
+
+                    // 3. 직접 location.href 설정하는 방법
+                    setTimeout(function () {
+                        window.location.href = "sms:" + phoneNumber;
+                    }, 200);
+
+                    // 4. window.open 사용
+                    setTimeout(function () {
+                        window.open("sms:" + phoneNumber, "_system");
+                    }, 250);
+                } catch (e) {
+                    console.error("문자 보내기 오류:", e);
+                    // 최후의 수단
+                    window.location.href = "sms:" + phoneNumber;
+                }
+            }
+
+            // 페이지 로드 완료 시 실행
+            window.addEventListener("load", function () {
+                // 카카오톡 WebView 감지
+                var isKakaoWebView = /kakaotalk/i.test(navigator.userAgent) || /kakao/i.test(navigator.userAgent);
+
+                if (isKakaoWebView) {
+                    console.log("카카오톡 WebView 환경이 감지되었습니다.");
+
+                    // meta 태그 추가
+                    var meta = document.createElement("meta");
+                    meta.name = "viewport";
+                    meta.content =
+                        "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi";
+                    document.getElementsByTagName("head")[0].appendChild(meta);
+
+                    // tel: 및 sms: 링크 처리 이벤트 리스너 추가
+                    document.addEventListener(
+                        "click",
+                        function (e) {
+                            var target = e.target;
+                            while (target && target.tagName !== "A") {
+                                target = target.parentNode;
+                                if (!target) break;
+                            }
+
+                            if (target && target.href) {
+                                var href = target.href;
+                                if (href.startsWith("tel:")) {
+                                    e.preventDefault();
+                                    callPhoneNumber(href.substring(4));
+                                } else if (href.startsWith("sms:")) {
+                                    e.preventDefault();
+                                    sendSMS(href.substring(4));
+                                }
+                            }
+                        },
+                        false
+                    );
+                }
+            });
+        </script>
     </head>
     <body>
         <script src="flutter_bootstrap.js" async></script>
