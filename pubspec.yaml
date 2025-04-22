@@ -82,3 +82,14 @@ flutter:
         - family: Francisco
           fonts:
               - asset: assets/fonts/Francisco.woff
+
+        - family: MaruBuri
+          fonts:
+              - asset: assets/fonts/MaruBuri-SemiBold.ttf
+                weight: 100
+              - asset: assets/fonts/MaruBuri-Light.ttf
+                weight: 300
+              - asset: assets/fonts/MaruBuri-Regular.ttf
+                weight: 400
+              - asset: assets/fonts/MaruBuri-Bold.ttf
+                weight: 700
