@@ -15,35 +15,36 @@ class _InvitationMessageWidgetState
     extends ConsumerState<InvitationMessageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const SizedBox(
+        SizedBox(
           height: 12,
         ),
-        const Text(
+        Text(
           AppString.homeInvitationMessageTitleEn,
           style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
         ),
-        const SizedBox(
+        SizedBox(
           height: 4,
         ),
-        const Text(
+        Text(
           AppString.homeInvitationMessageTitle,
           style: TextStyle(fontSize: 22, color: AppColor.color_9E9E9E),
         ),
-        const SizedBox(
+        SizedBox(
           height: 4,
         ),
-        const Text(
+        Text(
           AppString.homeInvitationMessageDesc,
           style: TextStyle(
+            fontFamily: "Komi",
             fontSize: 16,
             color: AppColor.color_9E9E9E,
             height: 2
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 24,),
+        SizedBox(height: 24,),
       ],
     );
   }

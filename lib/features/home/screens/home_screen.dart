@@ -18,7 +18,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     galleryImageList = ref.watch(galleryImageListProvider);
 
     return Scaffold(
-      backgroundColor: AppColor.color_ffffff,
+      backgroundColor: AppColor.color_FBF5EE,
       body: Center(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -29,8 +29,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const HomeTopWidget(),
-                BouquetWidget(),
-                InvitationMessageWidget(),
+                const BouquetWidget(),
+                const InvitationMessageWidget(),
+                HomeContactWidget(),
                 // HomeGalleryWidget(galleryImageList: galleryImageList)
                 HomeGalleryWidget2(galleryImageList: galleryImageList)
               ],
