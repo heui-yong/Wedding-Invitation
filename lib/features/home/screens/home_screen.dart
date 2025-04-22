@@ -31,7 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 const HomeTopWidget(),
                 const BouquetWidget(),
                 const InvitationMessageWidget(),
-                HomeContactWidget(),
+                const HomeContactWidget(),
                 // HomeGalleryWidget(galleryImageList: galleryImageList)
                 HomeGalleryWidget2(galleryImageList: galleryImageList)
               ],
