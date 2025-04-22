@@ -24,7 +24,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.6,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

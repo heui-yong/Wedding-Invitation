@@ -31,34 +31,32 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
         const SizedBox(
           height: 12,
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 220),
-          child: Center(
-            child: InkWell(
-              onTap: () => _showContactDialog(context),
-              child: Container(
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                      color: AppColor.color_5A5555.withOpacity(0.5), width: 1),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.call,
-                        color: AppColor.color_5A5555.withOpacity(0.5),
-                        size: 20),
-                    SizedBox(width: 12),
-                    Text(
-                      AppString.contact,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: AppColor.color_5A5555.withOpacity(0.9),
-                      ),
+        Center(
+          child: InkWell(
+            onTap: () => _showContactDialog(context),
+            child: Container(
+              width: 200,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                    color: AppColor.color_5A5555.withOpacity(0.5), width: 1),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.call,
+                      color: AppColor.color_5A5555.withOpacity(0.5),
+                      size: 20),
+                  SizedBox(width: 12),
+                  Text(
+                    AppString.contact,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: AppColor.color_5A5555.withOpacity(0.9),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
