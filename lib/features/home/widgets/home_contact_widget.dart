@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/common.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 class HomeContactWidget extends StatefulWidget {
   const HomeContactWidget({super.key});
@@ -46,8 +48,7 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.call,
-                      color: AppColor.color_5A5555.withOpacity(0.5),
-                      size: 20),
+                      color: AppColor.color_5A5555.withOpacity(0.5), size: 20),
                   SizedBox(width: 12),
                   Text(
                     AppString.contact,
@@ -114,7 +115,9 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
                     _buildContactRow("신랑", "이희용", Icons.call, Icons.email),
                     _buildContactRow("신랑 아버지", "이규동", Icons.call, Icons.email),
                     _buildContactRow("신랑 어머니", "윤선이", Icons.call, Icons.email),
-                    const Divider(height: 0.5,),
+                    const Divider(
+                      height: 0.5,
+                    ),
                     _buildContactRow("신부", "백정윤", Icons.call, Icons.email,
                         textColor: AppColor.color_C87878),
                     _buildContactRow("신부 아버지", "백상일", Icons.call, Icons.email,
@@ -135,7 +138,7 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
       String title, String name, IconData callIcon, IconData emailIcon,
       {Color textColor = AppColor.color_5A82A0}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
           SizedBox(
@@ -161,14 +164,42 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final phoneNumber = getPhoneNumber(title);
+              if (phoneNumber.isEmpty) return;
+
+              // 모바일 환경 감지
+              final bool isMobile = _isMobileDevice();
+
+              final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+              if (await canLaunchUrl(phoneUri)) {
+                await launchUrl(phoneUri, mode: LaunchMode.externalApplication);
+              } else if (isMobile) {
+                // 네이티브 앱으로 연결 실패 시 URL을 직접 열어봄
+                html.window.location.href = 'tel:$phoneNumber';
+              }
+            },
             icon: Icon(callIcon, color: textColor, size: 20),
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
           ),
           const SizedBox(width: 16),
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final phoneNumber = getPhoneNumber(title);
+              if (phoneNumber.isEmpty) return;
+
+              // 모바일 환경 감지
+              final bool isMobile = _isMobileDevice();
+
+              final Uri smsUri = Uri(scheme: 'sms', path: phoneNumber);
+              if (await canLaunchUrl(smsUri)) {
+                await launchUrl(smsUri, mode: LaunchMode.externalApplication);
+              } else if (isMobile) {
+                // 네이티브 앱으로 연결 실패 시 URL을 직접 열어봄
+                html.window.location.href = 'sms:$phoneNumber';
+              }
+            },
             icon: Icon(emailIcon, color: textColor, size: 20),
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
@@ -176,6 +207,35 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
         ],
       ),
     );
+  }
+
+  // 모바일 디바이스인지 확인하는 함수
+  bool _isMobileDevice() {
+    final userAgent = html.window.navigator.userAgent.toLowerCase();
+    return userAgent.contains('android') ||
+        userAgent.contains('iphone') ||
+        userAgent.contains('ipad') ||
+        userAgent.contains('ipod');
+  }
+
+  // 해당 인물의 전화번호를 반환하는 helper 메서드
+  String getPhoneNumber(String title) {
+    switch (title) {
+      case "신랑":
+        return "01012345678"; // 실제 신랑 전화번호로 변경해주세요
+      case "신랑 아버지":
+        return "01023456789"; // 실제 신랑 아버지 전화번호로 변경해주세요
+      case "신랑 어머니":
+        return "01034567890"; // 실제 신랑 어머니 전화번호로 변경해주세요
+      case "신부":
+        return "01045678901"; // 실제 신부 전화번호로 변경해주세요
+      case "신부 아버지":
+        return "01056789012"; // 실제 신부 아버지 전화번호로 변경해주세요
+      case "신부 어머니":
+        return "01067890123"; // 실제 신부 어머니 전화번호로 변경해주세요
+      default:
+        return "";
+    }
   }
 
   Row buildName(String text, String text1, String text2) {
