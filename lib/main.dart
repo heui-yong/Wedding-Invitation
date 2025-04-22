@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
-        fontFamily: "Komi"
+        fontFamily: "MaruBuri"
       ),
       routerConfig: appRouter,
     );
