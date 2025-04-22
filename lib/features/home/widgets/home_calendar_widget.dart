@@ -85,7 +85,7 @@ class _HomeCalendarWidgetState extends ConsumerState<HomeCalendarWidget> {
             Text(
               '희용 ❤️ 정윤의 결혼식이 ${_timeLeft.inDays}일 남았습니다.',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Colors.grey[700],
               ),
