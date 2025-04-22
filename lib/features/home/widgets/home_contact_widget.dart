@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/common/common.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:html' as html;
+import 'dart:js' as js;
 
 class HomeContactWidget extends StatefulWidget {
   const HomeContactWidget({super.key});
@@ -164,20 +165,11 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
             ),
           ),
           IconButton(
-            onPressed: () async {
+            onPressed: () {
               final phoneNumber = getPhoneNumber(title);
               if (phoneNumber.isEmpty) return;
 
-              // 모바일 환경 감지
-              final bool isMobile = _isMobileDevice();
-
-              final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
-              if (await canLaunchUrl(phoneUri)) {
-                await launchUrl(phoneUri, mode: LaunchMode.externalApplication);
-              } else if (isMobile) {
-                // 네이티브 앱으로 연결 실패 시 URL을 직접 열어봄
-                html.window.location.href = 'tel:$phoneNumber';
-              }
+              _makePhoneCall(phoneNumber);
             },
             icon: Icon(callIcon, color: textColor, size: 20),
             padding: EdgeInsets.zero,
@@ -185,20 +177,11 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
           ),
           const SizedBox(width: 16),
           IconButton(
-            onPressed: () async {
+            onPressed: () {
               final phoneNumber = getPhoneNumber(title);
               if (phoneNumber.isEmpty) return;
 
-              // 모바일 환경 감지
-              final bool isMobile = _isMobileDevice();
-
-              final Uri smsUri = Uri(scheme: 'sms', path: phoneNumber);
-              if (await canLaunchUrl(smsUri)) {
-                await launchUrl(smsUri, mode: LaunchMode.externalApplication);
-              } else if (isMobile) {
-                // 네이티브 앱으로 연결 실패 시 URL을 직접 열어봄
-                html.window.location.href = 'sms:$phoneNumber';
-              }
+              _sendSMS(phoneNumber);
             },
             icon: Icon(emailIcon, color: textColor, size: 20),
             padding: EdgeInsets.zero,
@@ -207,6 +190,100 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
         ],
       ),
     );
+  }
+
+  // 전화 걸기 기능을 처리하는 메서드
+  void _makePhoneCall(String phoneNumber) async {
+    // 카카오톡 WebView 감지
+    bool isKakaoWebView = _isKakaoWebView();
+
+    if (isKakaoWebView) {
+      // 카카오톡 내부 브라우저용 JavaScript 함수 호출
+      js.context.callMethod('callPhoneNumber', [phoneNumber]);
+      return;
+    }
+
+    // 일반 모바일 브라우저 또는 앱 처리
+    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+
+    try {
+      // 1. 기본 url_launcher 시도
+      if (await canLaunchUrl(phoneUri)) {
+        await launchUrl(phoneUri, mode: LaunchMode.externalApplication);
+        return;
+      }
+
+      // 2. HTML 직접 조작 시도
+      final bool isMobile = _isMobileDevice();
+      if (isMobile) {
+        // DOM 조작을 통한 전화 걸기
+        final aElement = html.AnchorElement()
+          ..href = 'tel:$phoneNumber'
+          ..target = '_blank'
+          ..style.display = 'none';
+
+        html.document.body?.children.add(aElement);
+        aElement.click();
+        html.document.body?.children.remove(aElement);
+        return;
+      }
+
+      // 3. 마지막 수단: JavaScript 함수 시도
+      js.context.callMethod('callPhoneNumber', [phoneNumber]);
+    } catch (e) {
+      // 오류 발생 시 JavaScript 함수로 시도
+      js.context.callMethod('callPhoneNumber', [phoneNumber]);
+    }
+  }
+
+  // 문자 보내기 기능을 처리하는 메서드
+  void _sendSMS(String phoneNumber) async {
+    // 카카오톡 WebView 감지
+    bool isKakaoWebView = _isKakaoWebView();
+
+    if (isKakaoWebView) {
+      // 카카오톡 내부 브라우저용 JavaScript 함수 호출
+      js.context.callMethod('sendSMS', [phoneNumber]);
+      return;
+    }
+
+    // 일반 모바일 브라우저 또는 앱 처리
+    final Uri smsUri = Uri(scheme: 'sms', path: phoneNumber);
+
+    try {
+      // 1. 기본 url_launcher 시도
+      if (await canLaunchUrl(smsUri)) {
+        await launchUrl(smsUri, mode: LaunchMode.externalApplication);
+        return;
+      }
+
+      // 2. HTML 직접 조작 시도
+      final bool isMobile = _isMobileDevice();
+      if (isMobile) {
+        // DOM 조작을 통한 문자 보내기
+        final aElement = html.AnchorElement()
+          ..href = 'sms:$phoneNumber'
+          ..target = '_blank'
+          ..style.display = 'none';
+
+        html.document.body?.children.add(aElement);
+        aElement.click();
+        html.document.body?.children.remove(aElement);
+        return;
+      }
+
+      // 3. 마지막 수단: JavaScript 함수 시도
+      js.context.callMethod('sendSMS', [phoneNumber]);
+    } catch (e) {
+      // 오류 발생 시 JavaScript 함수로 시도
+      js.context.callMethod('sendSMS', [phoneNumber]);
+    }
+  }
+
+  // 카카오톡 내부 브라우저인지 확인하는 함수
+  bool _isKakaoWebView() {
+    final userAgent = html.window.navigator.userAgent.toLowerCase();
+    return userAgent.contains('kakaotalk') || userAgent.contains('kakao');
   }
 
   // 모바일 디바이스인지 확인하는 함수
