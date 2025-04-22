@@ -45,44 +45,67 @@
 
         <!-- Phone and SMS handling for KakaoTalk WebView -->
         <script>
+            // 중복 호출 방지 플래그
+            var isProcessingCall = false;
+            var isProcessingSMS = false;
+
             // 전화 걸기 함수
             function callPhoneNumber(phoneNumber) {
+                // 이미 처리 중이면 중단
+                if (isProcessingCall) return;
+                isProcessingCall = true;
+
+                console.log("전화 걸기 시도: " + phoneNumber);
+
+                // 사용자 에이전트 확인
+                var userAgent = navigator.userAgent.toLowerCase();
+                var isKakao = userAgent.indexOf("kakaotalk") > -1 || userAgent.indexOf("kakao") > -1;
+                var isIOS = /iphone|ipad|ipod/.test(userAgent);
+                var isAndroid = userAgent.indexOf("android") > -1;
+
                 try {
-                    // 다양한 방법으로 시도
+                    if (isKakao) {
+                        // 카카오톡 WebView에서는 iframe 방식 사용
+                        var iframe = document.createElement("iframe");
+                        iframe.style.display = "none";
+                        iframe.src = "tel:" + phoneNumber;
+                        document.body.appendChild(iframe);
 
-                    // 1. iframe을 사용하는 방법
-                    var iframe = document.createElement("iframe");
-                    iframe.style.display = "none";
-                    iframe.src = "tel:" + phoneNumber;
-                    document.body.appendChild(iframe);
-                    setTimeout(function () {
-                        document.body.removeChild(iframe);
-                    }, 100);
-
-                    // 2. a 요소를 사용하는 방법
-                    setTimeout(function () {
+                        // 1초 후 플래그 리셋 및 iframe 제거
+                        setTimeout(function () {
+                            document.body.removeChild(iframe);
+                            isProcessingCall = false;
+                        }, 1000);
+                    } else if (isIOS) {
+                        // iOS의 경우 단순 location.href 사용
+                        window.location.href = "tel:" + phoneNumber;
+                        setTimeout(function () {
+                            isProcessingCall = false;
+                        }, 1000);
+                    } else if (isAndroid) {
+                        // 안드로이드의 경우 a 태그 사용
                         var a = document.createElement("a");
                         a.setAttribute("href", "tel:" + phoneNumber);
-                        a.setAttribute("target", "_blank");
                         a.style.display = "none";
                         document.body.appendChild(a);
                         a.click();
+
+                        // 1초 후 플래그 리셋 및 요소 제거
                         setTimeout(function () {
                             document.body.removeChild(a);
-                        }, 100);
-                    }, 150);
-
-                    // 3. 직접 location.href 설정하는 방법
-                    setTimeout(function () {
+                            isProcessingCall = false;
+                        }, 1000);
+                    } else {
+                        // 기타 환경
                         window.location.href = "tel:" + phoneNumber;
-                    }, 200);
-
-                    // 4. window.open 사용
-                    setTimeout(function () {
-                        window.open("tel:" + phoneNumber, "_system");
-                    }, 250);
+                        setTimeout(function () {
+                            isProcessingCall = false;
+                        }, 1000);
+                    }
                 } catch (e) {
                     console.error("전화 걸기 오류:", e);
+                    // 오류 발생 시 플래그 리셋
+                    isProcessingCall = false;
                     // 최후의 수단
                     window.location.href = "tel:" + phoneNumber;
                 }
@@ -90,42 +113,61 @@
 
             // 문자 보내기 함수
             function sendSMS(phoneNumber) {
+                // 이미 처리 중이면 중단
+                if (isProcessingSMS) return;
+                isProcessingSMS = true;
+
+                console.log("문자 보내기 시도: " + phoneNumber);
+
+                // 사용자 에이전트 확인
+                var userAgent = navigator.userAgent.toLowerCase();
+                var isKakao = userAgent.indexOf("kakaotalk") > -1 || userAgent.indexOf("kakao") > -1;
+                var isIOS = /iphone|ipad|ipod/.test(userAgent);
+                var isAndroid = userAgent.indexOf("android") > -1;
+
                 try {
-                    // 다양한 방법으로 시도
+                    if (isKakao) {
+                        // 카카오톡 WebView에서는 iframe 방식 사용
+                        var iframe = document.createElement("iframe");
+                        iframe.style.display = "none";
+                        iframe.src = "sms:" + phoneNumber;
+                        document.body.appendChild(iframe);
 
-                    // 1. iframe을 사용하는 방법
-                    var iframe = document.createElement("iframe");
-                    iframe.style.display = "none";
-                    iframe.src = "sms:" + phoneNumber;
-                    document.body.appendChild(iframe);
-                    setTimeout(function () {
-                        document.body.removeChild(iframe);
-                    }, 100);
-
-                    // 2. a 요소를 사용하는 방법
-                    setTimeout(function () {
+                        // 1초 후 플래그 리셋 및 iframe 제거
+                        setTimeout(function () {
+                            document.body.removeChild(iframe);
+                            isProcessingSMS = false;
+                        }, 1000);
+                    } else if (isIOS) {
+                        // iOS의 경우 단순 location.href 사용
+                        window.location.href = "sms:" + phoneNumber;
+                        setTimeout(function () {
+                            isProcessingSMS = false;
+                        }, 1000);
+                    } else if (isAndroid) {
+                        // 안드로이드의 경우 a 태그 사용
                         var a = document.createElement("a");
                         a.setAttribute("href", "sms:" + phoneNumber);
-                        a.setAttribute("target", "_blank");
                         a.style.display = "none";
                         document.body.appendChild(a);
                         a.click();
+
+                        // 1초 후 플래그 리셋 및 요소 제거
                         setTimeout(function () {
                             document.body.removeChild(a);
-                        }, 100);
-                    }, 150);
-
-                    // 3. 직접 location.href 설정하는 방법
-                    setTimeout(function () {
+                            isProcessingSMS = false;
+                        }, 1000);
+                    } else {
+                        // 기타 환경
                         window.location.href = "sms:" + phoneNumber;
-                    }, 200);
-
-                    // 4. window.open 사용
-                    setTimeout(function () {
-                        window.open("sms:" + phoneNumber, "_system");
-                    }, 250);
+                        setTimeout(function () {
+                            isProcessingSMS = false;
+                        }, 1000);
+                    }
                 } catch (e) {
                     console.error("문자 보내기 오류:", e);
+                    // 오류 발생 시 플래그 리셋
+                    isProcessingSMS = false;
                     // 최후의 수단
                     window.location.href = "sms:" + phoneNumber;
                 }
