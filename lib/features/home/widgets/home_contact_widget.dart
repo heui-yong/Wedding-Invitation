@@ -66,7 +66,7 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
           ),
         ),
         const SizedBox(
-          height: 12,
+          height: 36,
         ),
       ],
     );
