@@ -19,15 +19,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       backgroundColor: AppColor.color_ffffff,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const HomeTopWidget(),
-            HomeGalleryWidget(galleryImageList: galleryImageList)
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.6,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const HomeTopWidget(),
+                // HomeGalleryWidget(galleryImageList: galleryImageList)
+                HomeGalleryWidget2(galleryImageList: galleryImageList)
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -42,12 +42,12 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
                 fontSize: 24,
                 color: AppColor.color_9E9E9E),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
           Column(
             children: [
-              Container(
+              SizedBox(
                 width: 350,
-                height: 600,
+                height: 500,
                 child: Image.asset(
                   widget.galleryImageList[_currentIndex].assetPath,
                   fit: BoxFit.contain,
