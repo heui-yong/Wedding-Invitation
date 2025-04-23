@@ -17,5 +17,9 @@ class AppImagePath {
   static const String gallery11Path = "assets/images/gallery_11.jpg";
   static const String gallery12Path = "assets/images/gallery_12.jpg";
   static const String gallery13Path = "assets/images/gallery_13.jpg";
-  static const String gallery14Path = "assets/images/gallery_14.jpg";
+  static const String gallery15Path = "assets/images/gallery_15.jpg";
+  static const String gallery16Path = "assets/images/gallery_16.jpg";
+  static const String gallery17Path = "assets/images/gallery_17.jpg";
+  static const String gallery18Path = "assets/images/gallery_18.jpg";
+  static const String gallery19Path = "assets/images/gallery_19.jpg";
 }

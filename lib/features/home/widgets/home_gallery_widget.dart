@@ -36,7 +36,7 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
       child: Column(
         children: [
           Text(
-            AppString.homeGallery,
+            AppString.homeGalleryTitle,
             style: TextStyle(
                 fontFamily: "Francisco",
                 fontSize: 24,

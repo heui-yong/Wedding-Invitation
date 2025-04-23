@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/common/constants/app_color.dart';
+import 'package:frontend/common/constants/app_string.dart';
 import 'package:frontend/features/features.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -43,7 +45,7 @@ class _HomeCalendarWidgetState extends ConsumerState<HomeCalendarWidget> {
     return Container(
       color: const Color(0xFFF5F5F5),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 76),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -82,12 +84,28 @@ class _HomeCalendarWidgetState extends ConsumerState<HomeCalendarWidget> {
             const SizedBox(height: 24),
 
             // 메시지
-            Text(
-              '희용 ❤️ 정윤의 결혼식이 ${_timeLeft.inDays}일 남았습니다.',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[700],
+            Text.rich(
+              TextSpan(
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[700],
+                ),
+                children: [
+                  const TextSpan(text: AppString.groomName),
+                  const TextSpan(
+                    text: ' ♥ ',
+                    style: TextStyle(color: AppColor.color_E66E5F),
+                  ),
+                  const TextSpan(
+                    text: '정윤의 결혼식이 ',
+                  ),
+                  TextSpan(
+                    text: '${_timeLeft.inDays}',
+                    style: TextStyle(color: AppColor.color_E66E5F),
+                  ),
+                  const TextSpan(text: '일 남았습니다.'),
+                ],
               ),
             ),
           ],

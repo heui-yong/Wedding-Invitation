@@ -22,14 +22,14 @@ class _InvitationMessageWidgetState
         ),
         Text(
           AppString.homeInvitationMessageTitleEn,
-          style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E),
+          style: TextStyle(fontSize: 11, color: AppColor.color_9E9E9E),
         ),
         SizedBox(
           height: 4,
         ),
         Text(
           AppString.homeInvitationMessageTitle,
-          style: TextStyle(fontSize: 22, color: AppColor.color_9E9E9E),
+          style: TextStyle(fontSize: 18, color: AppColor.color_9E9E9E),
         ),
         SizedBox(
           height: 4,
