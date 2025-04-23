@@ -38,7 +38,7 @@ class _ContactDialogState extends State<ContactDialog> {
                   Text(
                     "CONTACT",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 11,
                       color: Colors.grey,
                       letterSpacing: 2,
                     ),
@@ -84,7 +84,7 @@ class _ContactDialogState extends State<ContactDialog> {
       String title, String name, IconData callIcon, IconData emailIcon,
       {Color textColor = AppColor.color_5A82A0}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 1),
       child: Row(
         children: [
           SizedBox(

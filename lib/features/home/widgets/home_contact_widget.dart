@@ -22,7 +22,7 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.asset(
-            AppImagePath.gallery14Path,
+            AppImagePath.gallery8Path,
             fit: BoxFit.cover,
           ),
         ),
@@ -66,7 +66,7 @@ class _HomeContactWidgetState extends State<HomeContactWidget> {
           ),
         ),
         const SizedBox(
-          height: 36,
+          height: 72,
         ),
       ],
     );
