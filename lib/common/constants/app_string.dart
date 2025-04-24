@@ -21,4 +21,6 @@ class AppString {
   static const String groomMName = "윤선이";
   static const String brideFName = "백 상 일";
   static const String brideMName = "홍길동";
+  static const String homeMapTitleEn = "LOCATION";
+  static const String homeMapTitleKo = "오시는 길";
 }

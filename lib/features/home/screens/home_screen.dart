@@ -35,8 +35,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 const InvitationMessageWidget(),
                 const HomeContactWidget(),
                 HomeCalendarWidget(),
-                HomeGalleryWidget(galleryImageList1to2: galleryImageList1to2, galleryImageList1to1: galleryImageList1to1,)
-                // HomeGalleryWidget3(galleryImageList1to2: galleryImageList1to2, galleryImageList1to1: galleryImageList1to1,)
+                HomeGalleryWidget(galleryImageList1to2: galleryImageList1to2, galleryImageList1to1: galleryImageList1to1,),
+                HomeMapWidget()
               ],
             ),
           ),
