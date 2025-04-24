@@ -1,5 +1,5 @@
 class GalleryModel {
-  final String id;
+  final int id;
   final String assetPath;
   final bool isVertical;
 

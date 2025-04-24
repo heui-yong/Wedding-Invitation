@@ -11,11 +11,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  late List<GalleryModel> galleryImageList;
+  late List<GalleryModel> galleryImageList1to2;
+  late List<GalleryModel> galleryImageList1to1;
 
   @override
   Widget build(BuildContext context) {
-    galleryImageList = ref.watch(galleryImageListProvider);
+    galleryImageList1to2 = ref.watch(galleryImageListProvider1to2);
+    galleryImageList1to1 = ref.watch(galleryImageListProvider1to1);
 
     return Scaffold(
       backgroundColor: AppColor.color_FBF5EE,
@@ -33,8 +35,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 const InvitationMessageWidget(),
                 const HomeContactWidget(),
                 HomeCalendarWidget(),
-                // HomeGalleryWidget(galleryImageList: galleryImageList)
-                HomeGalleryWidget2(galleryImageList: galleryImageList)
+                HomeGalleryWidget(galleryImageList1to2: galleryImageList1to2, galleryImageList1to1: galleryImageList1to1,)
+                // HomeGalleryWidget3(galleryImageList1to2: galleryImageList1to2, galleryImageList1to1: galleryImageList1to1,)
               ],
             ),
           ),
