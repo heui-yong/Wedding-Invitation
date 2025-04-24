@@ -14,15 +14,18 @@ class _HomeMapWidgetState extends State<HomeMapWidget> {
   @override
   void initState() {
     super.initState();
-    // iframe으로 네이버 지도 등록
+    // iframe으로 카카오 지도 등록
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
-      'naver-map',
+      'kakao-map',
       (int viewId) => IFrameElement()
         ..style.width = '100%'
         ..style.height = '100%'
-        ..src = 'assets/map.html'
-        ..style.border = 'none',
+        ..src = 'kakao_map/map.html'
+        ..style.border = 'none'
+        ..setAttribute('referrerpolicy', 'no-referrer-when-downgrade')
+        ..setAttribute('allow', 'geolocation')
+        ..allowFullscreen = true,
     );
   }
 
@@ -46,8 +49,8 @@ class _HomeMapWidgetState extends State<HomeMapWidget> {
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
           height: 300,
-          // 네이버 지도 표시
-          child: HtmlElementView(viewType: 'naver-map'),
+          // 카카오 지도 표시
+          child: HtmlElementView(viewType: 'kakao-map'),
         ),
       ],
     );
