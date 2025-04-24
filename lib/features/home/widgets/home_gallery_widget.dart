@@ -56,13 +56,8 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget>
 
     return Column(
       children: [
-        const SizedBox(height: 72),
-        Text(AppString.homeGalleryTitleEn,
-            style: TextStyle(fontSize: 11, color: AppColor.color_9E9E9E)),
-        const SizedBox(height: 4),
-        Text(AppString.homeGalleryTitle,
-            style: TextStyle(fontSize: 18, color: AppColor.color_9E9E9E)),
-        const SizedBox(height: 12),
+        SizedBox(height: 72,),
+        TitleWidget(titleEn: AppString.homeGalleryTitleEn, titleKo: AppString.homeGalleryTitle),
         Stack(
           children: [
             AnimatedBuilder(
@@ -116,9 +111,9 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget>
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.white.withOpacity(0.0),
-                      Colors.white.withOpacity(0.8),
-                      Colors.white,
+                      AppColor.color_FBF5EE.withOpacity(0.0),
+                      AppColor.color_FBF5EE.withOpacity(0.8),
+                      AppColor.color_FBF5EE,
                     ],
                   )
                 ),
@@ -160,6 +155,7 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget>
             ),
           ],
         ),
+        const SizedBox(height: 36),
       ],
     );
   }
