@@ -7,20 +7,27 @@ class HomeGalleryWidget extends ConsumerStatefulWidget {
   final List<GalleryModel> galleryImageList1to2;
   final List<GalleryModel> galleryImageList1to1;
 
-  const HomeGalleryWidget({super.key, required this.galleryImageList1to2, required this.galleryImageList1to1});
+  const HomeGalleryWidget(
+      {super.key,
+      required this.galleryImageList1to2,
+      required this.galleryImageList1to1});
 
   @override
   ConsumerState<HomeGalleryWidget> createState() => _HomeGalleryWidgetState();
 }
 
-class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
+class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget>
+    with TickerProviderStateMixin {
+  bool _isExpanded = false;
+
   int _currentIndex = 0;
   late final PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.2, initialPage: _currentIndex);
+    _pageController =
+        PageController(viewportFraction: 0.2, initialPage: _currentIndex);
   }
 
   @override
@@ -43,17 +50,93 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
         Text(AppString.homeGalleryTitle,
             style: TextStyle(fontSize: 18, color: AppColor.color_9E9E9E)),
         const SizedBox(height: 12),
-        // 3개씩 묶어서 반복 생성
-        ...List.generate(rowCount, (rowIdx) {
-          final start = rowIdx * 3;
-          final chunk = widget.galleryImageList1to2.sublist(start, start + 3 > widget.galleryImageList1to2.length ? widget.galleryImageList1to2.length : start + 3);
-          return _buildGalleryRow(chunk, largeLeft: rowIdx.isEven);
-        }),
-        ...List.generate(rowCount1, (rowIdx) {
-          final start = rowIdx * 4;
-          final chunk = widget.galleryImageList1to1.sublist(start, start + 4 > widget.galleryImageList1to1.length ? widget.galleryImageList1to1.length : start + 4);
-          return _buildGalleryRow2(chunk, largeLeft: rowIdx.isEven);
-        }),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 300),
+          child: ClipRect(
+            child: _isExpanded
+                ? Column(
+                    children: [
+                      // 3개씩 묶어서 반복 생성
+                      ...List.generate(rowCount, (rowIdx) {
+                        final start = rowIdx * 3;
+                        final chunk = widget.galleryImageList1to2.sublist(
+                            start,
+                            start + 3 > widget.galleryImageList1to2.length
+                                ? widget.galleryImageList1to2.length
+                                : start + 3);
+                        return _buildGalleryRow(chunk,
+                            largeLeft: rowIdx.isEven);
+                      }),
+                      ...List.generate(rowCount1, (rowIdx) {
+                        final start = rowIdx * 4;
+                        final chunk = widget.galleryImageList1to1.sublist(
+                            start,
+                            start + 4 > widget.galleryImageList1to1.length
+                                ? widget.galleryImageList1to1.length
+                                : start + 4);
+                        return _buildGalleryRow2(chunk,
+                            largeLeft: rowIdx.isEven);
+                      }),
+                    ],
+                  )
+                : ClipRect(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 560),
+                      child: SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            // 3개씩 묶어서 반복 생성
+                            ...List.generate(rowCount, (rowIdx) {
+                              final start = rowIdx * 3;
+                              final chunk = widget.galleryImageList1to2.sublist(
+                                  start,
+                                  start + 3 > widget.galleryImageList1to2.length
+                                      ? widget.galleryImageList1to2.length
+                                      : start + 3);
+                              return _buildGalleryRow(chunk,
+                                  largeLeft: rowIdx.isEven);
+                            }),
+                            ...List.generate(rowCount1, (rowIdx) {
+                              final start = rowIdx * 4;
+                              final chunk = widget.galleryImageList1to1.sublist(
+                                  start,
+                                  start + 4 > widget.galleryImageList1to1.length
+                                      ? widget.galleryImageList1to1.length
+                                      : start + 4);
+                              return _buildGalleryRow2(chunk,
+                                  largeLeft: rowIdx.isEven);
+                            }),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+          ),
+        ),
+        SizedBox(height: 18,),
+        GestureDetector(
+          onTap: () => setState(() => _isExpanded = !_isExpanded),
+          child: Container(
+            width: 160,
+            height: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                  color: AppColor.color_5A5555.withOpacity(0.5), width: 1),
+            ),
+            child: Center(
+              child: Text(
+                _isExpanded ? "접기" : "더 보기",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: AppColor.color_5A5555.withOpacity(0.9),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -65,23 +148,40 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
       child: Row(
         children: largeLeft
             ? [
-          Expanded(flex: 1, child: _buildImage(imgs[0])),
-          Expanded(flex: 1, child: Column(
-            children: [
-              Expanded(child: _buildImage(imgs.length > 1 ? imgs[1] : imgs[0], alignment: const Alignment(0, -0.5))),
-              Expanded(child: _buildImage(imgs.length > 2 ? imgs[2] : imgs[0], alignment: const Alignment(0, -0.3))),
-            ],
-          )),
-        ]
+                Expanded(flex: 1, child: _buildImage(imgs[0])),
+                Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: _buildImage(
+                                imgs.length > 1 ? imgs[1] : imgs[0],
+                                alignment: const Alignment(0, -0.5))),
+                        Expanded(
+                            child: _buildImage(
+                                imgs.length > 2 ? imgs[2] : imgs[0],
+                                alignment: const Alignment(0, -0.3))),
+                      ],
+                    )),
+              ]
             : [
-          Expanded(flex: 1, child: Column(
-            children: [
-              Expanded(child: _buildImage(imgs[0], alignment: const Alignment(0, 0))),
-              Expanded(child: _buildImage(imgs.length > 1 ? imgs[1] : imgs[0], alignment: const Alignment(0, -0.9))),
-            ],
-          )),
-          Expanded(flex: 1, child: _buildImage(imgs.length > 2 ? imgs[2] : imgs[0])),
-        ],
+                Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: _buildImage(imgs[0],
+                                alignment: const Alignment(0, 0))),
+                        Expanded(
+                            child: _buildImage(
+                                imgs.length > 1 ? imgs[1] : imgs[0],
+                                alignment: const Alignment(0, -0.9))),
+                      ],
+                    )),
+                Expanded(
+                    flex: 1,
+                    child: _buildImage(imgs.length > 2 ? imgs[2] : imgs[0])),
+              ],
       ),
     );
   }
@@ -113,7 +213,8 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: _buildImage(imgs[2], alignment: const Alignment(0, -0.7)),
+                  child:
+                      _buildImage(imgs[2], alignment: const Alignment(0, -0.7)),
                 ),
                 Expanded(
                   flex: 2,
@@ -127,7 +228,8 @@ class _HomeGalleryWidgetState extends ConsumerState<HomeGalleryWidget> {
     );
   }
 
-  Widget _buildImage(GalleryModel model, {Alignment alignment = Alignment.center}) {
+  Widget _buildImage(GalleryModel model,
+      {Alignment alignment = Alignment.center}) {
     final List<GalleryModel> combinedList = [
       ...widget.galleryImageList1to2,
       ...widget.galleryImageList1to1,

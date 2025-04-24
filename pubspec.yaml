@@ -47,9 +47,6 @@ dependencies:
     # 카카오 SDK
     kakao_flutter_sdk: ^1.8.0
 
-    #갤러리 정리 패키지
-    flutter_staggered_grid_view: ^0.7.0
-
     # JavaScript 연동
     js: ^0.6.7
     url_launcher: ^6.3.1
