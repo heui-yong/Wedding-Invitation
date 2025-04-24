@@ -78257,17 +78257,20 @@ ac(){return new A.Rb()}}
 A.Rb.prototype={
 av(){this.aN()
 $.avk()
-$.Gg().yK("naver-map",new A.akS(),!0)},
+$.Gg().yK("kakao-map",new A.akS(),!0)},
 H(a){var s=null
-return A.dj(A.b([new A.BI("LOCATION","\uc624\uc2dc\ub294 \uae38",s),A.ee(s,12,s),A.cK("\uc13c\ud140 \ud504\ub9ac\ubbf8\uc5b4\ud638\ud154 \uc6e8\ub529\ud640 2F",s,s,s,s,s,s,s,s,A.cX(s,s,B.m,s,s,s,s,s,s,s,s,16,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s,s,s),A.ee(s,8,s),A.cK("\ubd80\uc0b0 \ud574\uc6b4\ub300\uad6c \uc13c\ud1401\ub85c 17",s,s,s,s,s,s,s,s,A.cX(s,s,B.aQ,s,s,s,s,s,s,s,s,14,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s,s,s),A.dH(s,new A.Ju("naver-map",s),B.q,s,s,300,s,s,A.by(a,s,t.w).w.a.a*0.9)],t.p),B.t,B.J,B.E)}}
+return A.dj(A.b([new A.BI("LOCATION","\uc624\uc2dc\ub294 \uae38",s),A.ee(s,12,s),A.cK("\uc13c\ud140 \ud504\ub9ac\ubbf8\uc5b4\ud638\ud154 \uc6e8\ub529\ud640 2F",s,s,s,s,s,s,s,s,A.cX(s,s,B.m,s,s,s,s,s,s,s,s,16,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s,s,s),A.ee(s,8,s),A.cK("\ubd80\uc0b0 \ud574\uc6b4\ub300\uad6c \uc13c\ud1401\ub85c 17",s,s,s,s,s,s,s,s,A.cX(s,s,B.aQ,s,s,s,s,s,s,s,s,14,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s,s,s),A.dH(s,new A.Ju("kakao-map",s),B.q,s,s,300,s,s,A.by(a,s,t.w).w.a.a*0.9)],t.p),B.t,B.J,B.E)}}
 A.akS.prototype={
 $1(a){var s=document.createElement("iframe"),r=s.style
 r.width="100%"
 r=s.style
 r.height="100%"
-s.src="assets/map.html"
+s.src="kakao_map/map.html"
 r=s.style
 r.border="none"
+s.setAttribute("referrerpolicy","no-referrer-when-downgrade")
+s.setAttribute("allow","geolocation")
+s.allowFullscreen=!0
 return s},
 $S:503}
 A.Jt.prototype={
