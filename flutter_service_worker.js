@@ -5,6 +5,7 @@ const CACHE_NAME = 'flutter-app-cache';
 
 const RESOURCES = {"assets/AssetManifest.json": "5fc2637e1361511a16e99a78957d2be5",
 "assets/AssetManifest.bin": "7c03c40b46d6ab2c642af211fe1137d9",
+"assets/map.html": "f2b0e8dfe0b5edafd1e3fb68fdbc5669",
 "assets/assets/fonts/Francisco.woff": "b76f90bc037f63f9beec03aa2df6fec2",
 "assets/assets/fonts/MaruBuri-SemiBold.ttf": "43dffdac3db1bcce6ffc1ffa6d93f5c8",
 "assets/assets/fonts/MaruBuri-Regular.ttf": "5a792d9e00f442f4b9222649b704fcf4",
@@ -51,13 +52,13 @@ const RESOURCES = {"assets/AssetManifest.json": "5fc2637e1361511a16e99a78957d2be
 "canvaskit/skwasm.worker.js": "89990e8c92bcb123999aa81f7e203b1c",
 "index.html": "ac743aa4d403471598199103966948af",
 "/": "ac743aa4d403471598199103966948af",
-"flutter_bootstrap.js": "ae8236e1aee4bf6ce4f4c0dbc7807a21",
+"flutter_bootstrap.js": "614551d381dea2c56e2aeebffce51b0a",
 "icons/Icon-192.png": "a1232325f18e6e913e075952ba3a43df",
 "icons/Icon-maskable-192.png": "b49ac3b3853559b126362b778f9ee7de",
 "icons/Icon-maskable-512.png": "79de3889e6889b542cda9ae7ce4803d8",
 "icons/Icon-512.png": "6208574e0a2bed7848b488455d3c8d82",
 "favicon.png": "b8fc932282b9ab5270a2d1149e0ddde0",
-"main.dart.js": "d03047283c1a79279f92b96a97fd47f9"};
+"main.dart.js": "1513be7a0ba50d5fa654a6499f4907c1"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
