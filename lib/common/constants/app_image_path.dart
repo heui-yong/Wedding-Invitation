@@ -2,6 +2,9 @@ class AppImagePath {
   static const String splashIconPath = "assets/images/splash_icon.png";
   static const String homeTitlePath = "assets/images/home_title.jpg";
   static const String bouquetPath = "assets/images/bouquet.png";
+  static const String naverMapPath = "assets/images/naver_map.png";
+  static const String kakaoMapPath = "assets/images/kakao_map.png";
+  static const String tMapPath = "assets/images/t_map.png";
 
   // 갤러리에 들어갈 이미지 모음
   static const String gallery1Path = "assets/images/gallery_1.jpg";
