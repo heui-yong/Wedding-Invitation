@@ -46,13 +46,68 @@ class _HomeMapWidgetState extends State<HomeMapWidget> {
         ),
         Text("부산 해운대구 센텀1로 17",
             style: TextStyle(fontSize: 14, color: AppColor.color_9E9E9E)),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 300,
-          // 카카오 지도 표시
-          child: HtmlElementView(viewType: 'kakao-map'),
+        SizedBox(
+          height: 12,
+        ),
+        Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 300,
+              color: AppColor.color_9E9E9E,
+              // 카카오 지도 표시
+              child: HtmlElementView(viewType: 'kakao-map'),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              color: AppColor.color_F5E6E6.withOpacity(0.3),
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(child: buildMapMethod(AppImagePath.naverMapPath, "네이버 지도")),
+                  VerticalDivider(
+                    color: AppColor.color_9E9E9E,
+                    thickness: 1,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  Expanded(child: buildMapMethod(AppImagePath.kakaoMapPath, "카카오 내비")),
+                  VerticalDivider(
+                    color: AppColor.color_9E9E9E,
+                    thickness: 1,
+                    indent: 10,
+                    endIndent: 10,
+                  ),
+                  Expanded(child: buildMapMethod(AppImagePath.tMapPath, "티맵")),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+          ],
         ),
       ],
+    );
+  }
+
+  Center buildMapMethod(String imagePath, String mapName) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            imagePath,
+            width: 18,
+            height: 18,
+          ),
+          const SizedBox(width: 12,),
+          Text(
+            mapName,
+            style: TextStyle(color: AppColor.color_000000, fontSize: 14),
+          )
+        ],
+      ),
     );
   }
 }
