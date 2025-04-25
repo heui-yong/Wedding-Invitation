@@ -28,14 +28,14 @@
             window.onload = function () {
                 var container = document.getElementById("map");
                 var options = {
-                    center: new kakao.maps.LatLng(35.1733071, 129.1302927), // 부산 해운대구 센텀1로 17 좌표
+                    center: new kakao.maps.LatLng(35.167043, 129.131657), // 부산 해운대구 센텀1로 17 좌표
                     level: 3,
                 };
 
                 var map = new kakao.maps.Map(container, options);
 
                 // 마커 표시
-                var markerPosition = new kakao.maps.LatLng(35.1733071, 129.1302927);
+                var markerPosition = new kakao.maps.LatLng(35.167043, 129.131657);
                 var marker = new kakao.maps.Marker({
                     position: markerPosition,
                 });
